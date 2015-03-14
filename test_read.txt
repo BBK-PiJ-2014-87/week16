@@ -1,0 +1,7 @@
+This is a first line to print
+Second line
+Third line the next line is
+Fourth line
+Line 5
+Line 6
+Last line
