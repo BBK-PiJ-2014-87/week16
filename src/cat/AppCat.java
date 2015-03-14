@@ -2,7 +2,7 @@ package cat;
 
 /**
  * Application reads file that is inputed through the console.
- * @author Workstation
+ * @author Vladimirs Ivanovs
  *
  */
 public class AppCat {

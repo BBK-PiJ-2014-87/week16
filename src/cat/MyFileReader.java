@@ -9,7 +9,7 @@ import java.io.Reader;
 
 /**
  * Reads the file and prints its content to the console.
- * @author Workstation
+ * @author Vladimirs Ivanovs
  *
  */
 public class MyFileReader {
