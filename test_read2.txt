@@ -1,0 +1,4 @@
+FILE2: Line number 1
+FILE2: Line number 2
+FILE2: Line number 3
+FILE2: Line number 4
