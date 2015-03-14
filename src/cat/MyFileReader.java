@@ -16,7 +16,6 @@ public class MyFileReader {
 	public void read(String fileName){
 		File file = new File(fileName);
 		BufferedReader bufReader = null;
-		if(file.exists());
 		try {
 			FileReader fileReader = new FileReader(file);
 			bufReader = new BufferedReader(fileReader);
@@ -26,7 +25,6 @@ public class MyFileReader {
 			}
 		} catch (FileNotFoundException e) {
 			System.out.println("File "+ fileName+ " not found.");
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally{
@@ -44,7 +42,8 @@ public class MyFileReader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e){
-			e.printStackTrace(); //if reader won't be created at all
+			//if reader won't be created at all
+			System.out.println("File was not opened. Nothing to read.");
 		}
 	}
 
