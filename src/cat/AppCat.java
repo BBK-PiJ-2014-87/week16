@@ -7,11 +7,19 @@ package cat;
  */
 public class AppCat {
 	public static void main(String[] args) {
-		//file to test
-		//String fileName = "test_read.txt";
-		String fileName = args[0];
+		
 		MyFileReader reader = new MyFileReader();
-		reader.read(fileName);
+		try{
+			//below is a file for quick test
+//			String fileName = "test_read.txt";
+			String fileName = args[0];
+//			reader.read(fileName);
+			reader.readRes(fileName);
+		}catch(ArrayIndexOutOfBoundsException e){
+			System.out.println("No file entered. Please enter a valid file name.");
+		}
+		
+		
 	}
 
 }

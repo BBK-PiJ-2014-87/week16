@@ -13,6 +13,32 @@ import java.io.Reader;
  *
  */
 public class MyFileReader {
+	
+	/**
+	 * Reads content of the file.
+	 * Opens and closes file with try-with-resources block.
+	 * This option is available from Java 7.
+	 * @param fileName
+	 */
+	public void readRes(String fileName){
+		File file = new File(fileName);
+		try (BufferedReader bufReader = new BufferedReader(new FileReader(file))){
+			String line;
+			while((line = bufReader.readLine()) != null){
+				System.out.println(line);
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File "+ fileName+ " not found.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Reads file.
+	 * Closes resources using finally block.
+	 * @param fileName
+	 */
 	public void read(String fileName){
 		File file = new File(fileName);
 		BufferedReader bufReader = null;
