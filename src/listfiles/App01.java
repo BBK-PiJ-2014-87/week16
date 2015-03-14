@@ -1,6 +1,5 @@
 package listfiles;
 
-import java.io.File;
 
 /**
  * Application to run FFLister class
