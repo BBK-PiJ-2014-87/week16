@@ -7,84 +7,64 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Tr {
+	private File source; 			
+	private File target;
+	private String oldText; 	//text to be replaced
+	private String newText; 	//replacement text
+	public String fileContent;	//all content of the file
 	
-	public boolean fileExists(String fileName){
-		Path filePath = Paths.get(fileName);
-		File file = filePath.toFile();
-		if(file.exists()&& file.isFile()){
-			return false;
-		}else{
-			System.out.println("File doesn't exist.");
-			return true;
-		}
+	public Tr(String source, String target, String oldText, String newText){
+		this.source = new File(source);
+		this.target = new File(target);
+		this.oldText = oldText;
+		this.newText = newText;
 	}
 	
-	public void readFile(String fileName, String fileName2){
-		File file = new File(fileName);
-		File file2 = new File(fileName2);
-		BufferedReader bufReader=null;
-		BufferedWriter bufWriter = null;
-		try {
-			bufReader = new BufferedReader(new FileReader(file));
-			bufWriter = new BufferedWriter(new FileWriter(file2));
-			String str;
-			while((str = bufReader.readLine()) != null){
-				bufWriter.write(str.toUpperCase());
-				bufWriter.newLine();
-				bufWriter.flush();
-			}
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e){
-			e.printStackTrace();
-		} finally{
-			try {
-				bufReader.close();
-				bufWriter.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
-	}	 
+	public Tr(String source, String oldText, String newText){
+		this.source = new File(source);
+		target = this.source;
+		this.oldText = oldText;
+		this.newText = newText;
+	}
 	
-	public void readFile(String fileName){
+	public void run(){
+		readContent();
+		replaceText();
+		writeContent();
+	}
+	
+	private void replaceText(){
+		fileContent = fileContent.replaceAll(oldText, newText);
+	}
+	
+	private void readContent(){
 		StringBuilder content = new StringBuilder();
-		File file = new File(fileName);
-		BufferedReader bufReader=null;
-		BufferedWriter bufWriter = null;
-		
-		try {
-			bufReader = new BufferedReader(new FileReader(file));
+		try(BufferedReader reader = new BufferedReader(new FileReader(source))){
 			String str;
-			while((str = bufReader.readLine()) != null){
-				content.append(str.toLowerCase());
+			//reads and adds each line to StringBuilder
+			while((str = reader.readLine()) != null){
+				content.append(str);
 				content.append("\n");
 			}
-			
-			bufWriter = new BufferedWriter(new FileWriter(file));
-			bufWriter.write(content.toString());
-			bufWriter.flush();
-			
+			fileContent = content.toString();
 		} catch (FileNotFoundException e) {
+			System.out.println("File doesn't exist.");
+		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (IOException e){
-			e.printStackTrace();
-		} finally{
-			try {
-				bufReader.close();
-				bufWriter.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
 		} 
-	}	
+		
+	}
 	
-
+	private void writeContent(){
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter(target))){
+			writer.write(fileContent);
+			writer.flush();
+		} catch (FileNotFoundException e) {
+			System.out.println("File doesn't exist.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}	
 }
