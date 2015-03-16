@@ -13,16 +13,16 @@ import java.io.IOException;
  */
 public class TempAvarage {
 	public static void main(String[] args) {
-		String file = "";
-		double lineAvrg = 0.0;
-		double fileAvrg = 0.0;
-		int lineCount = 0;
+		String file = "Untitled.csv";
+		double lineAvrg = 0.0;			//average value of a line
+		double fileAvrg = 0.0;			//average value of a file
+		int lineCount = 0;				//number of lines in a file
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 			String str;
 			String[] array;
 			while((str = reader.readLine()) != null){
 				lineCount++;
-				array = str.split(",");
+				array = str.split(",");	//splits string into tokens and puts in the array
 				lineAvrg = 0;
 				for(String s:array){
 					lineAvrg = lineAvrg + Double.parseDouble(s.trim());
